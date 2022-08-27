@@ -36,10 +36,23 @@ export default function App() {
     }
   };
 
+  // Remove item completely from the cart if the amount is one, otherwise decrease the amount of the item
   const removeFromCart = (item) => {
-    setItemsInCart((previous) =>
-      previous.filter((savedItem) => savedItem.item._id !== item.item._id)
-    );
+    if (
+      itemsInCart.some((i) => i.item._id === item.item._id && i.amount === 1)
+    ) {
+      setItemsInCart((previous) =>
+        previous.filter((savedItem) => savedItem.item._id !== item.item._id)
+      );
+    }
+    if (itemsInCart.some((i) => i.item._id === item.item._id && i.amount > 1)) {
+      const newItemsInCart = itemsInCart.map((obj) => {
+        if (obj.item._id === item.item._id)
+          return { ...obj, amount: --obj.amount };
+        return obj;
+      });
+      setItemsInCart(newItemsInCart);
+    }
   };
 
   const showCart = () => {
