@@ -5,8 +5,7 @@ import ItemsList from '../components/ItemsList/ItemList';
 
 export default function Shop({ items, addToCart }) {
   return (
-    <Container fluid>
-      <h1>Shop</h1>
+    <Container className="mt-5 mb-5" fluid>
       <ItemsList items={items} addToCart={addToCart} />
     </Container>
   );
