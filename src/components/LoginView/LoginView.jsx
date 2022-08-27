@@ -1,9 +1,10 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 import './LoginView.scss';
+
+import { login } from '../../api/users';
 
 export default function LoginView({ toggleLoginRegistration, saveUser }) {
   const [username, setUsername] = useState('');
@@ -12,20 +13,12 @@ export default function LoginView({ toggleLoginRegistration, saveUser }) {
   // Validate user input
   const validLoginInput = () => {
     let validInput = true;
-    if (!username) {
+    if (!username || username < 3) {
       validInput = false;
     }
-    if (username < 3) {
+    if (!password || password < 4) {
       validInput = false;
     }
-
-    if (!password) {
-      validInput = false;
-    }
-    if (password < 4) {
-      validInput = false;
-    }
-
     return validInput;
   };
 
@@ -35,17 +28,12 @@ export default function LoginView({ toggleLoginRegistration, saveUser }) {
     if (validInput) {
       try {
         // Send request to server for authentication
-        let response = await axios.post(
-          'https://shop-api-2022.herokuapp.com/login',
-          {
-            Username: username,
-            Password: password,
-          }
-        );
-        console.log(response.data);
-        saveUser(response.data);
+        let response = await login(username, password);
+        saveUser(response.user);
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('user', response.user.Username);
       } catch (error) {
-        console.log('No such user');
+        console.log(error);
       }
     }
   };

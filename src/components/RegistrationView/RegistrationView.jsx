@@ -1,9 +1,10 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 import './RegistrationView.scss';
+
+import { register } from '../../api/users';
 
 export default function RegistrationView({ toggleLoginRegistration }) {
   const [username, setUsername] = useState('');
@@ -14,12 +15,8 @@ export default function RegistrationView({ toggleLoginRegistration }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('https://shop-api-2022.herokuapp.com/users', {
-        Username: username,
-        Email: email,
-        Password: password,
-        Birthday: birthday,
-      });
+      // Send request to server for register new user
+      await register(username, password, email, birthday);
       alert('Registration successful, please login.');
     } catch (error) {
       console.log('Error');
@@ -42,21 +39,21 @@ export default function RegistrationView({ toggleLoginRegistration }) {
           required
         />
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formRegistrationEmail">
-        <Form.Label>Email</Form.Label>
-        <Form.Control
-          type="text"
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter email"
-          required
-        />
-      </Form.Group>
       <Form.Group className="mb-3" controlId="formRegistrationPassword">
         <Form.Label>Password</Form.Label>
         <Form.Control
           type="password"
           onChange={(e) => setPassword(e.target.value)}
           placeholder="At least 4 characters"
+          required
+        />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formRegistrationEmail">
+        <Form.Label>Email</Form.Label>
+        <Form.Control
+          type="text"
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter email"
           required
         />
       </Form.Group>
