@@ -38,7 +38,7 @@ export default function App() {
 
   const removeFromCart = (item) => {
     setItemsInCart((previous) =>
-      previous.filter((savedItem) => savedItem._id !== item.item._id)
+      previous.filter((savedItem) => savedItem.item._id !== item.item._id)
     );
   };
 
