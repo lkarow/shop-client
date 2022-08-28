@@ -8,3 +8,14 @@ export async function getItems() {
     console.log(error);
   }
 }
+
+export async function getItem(itemId) {
+  try {
+    let response = await axios.get(
+      `https://shop-api-2022.herokuapp.com/items/${itemId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+}
