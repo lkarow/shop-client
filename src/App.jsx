@@ -3,9 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 
 import Shop from './pages/Shop';
 import Profile from './pages/Profile';
+import Item from './pages/Item';
 import NavbarView from './components/NavbarView/NavbarView';
 import CartView from './components/CartView/CartView';
-
 import { getItems } from './api/items';
 import { updateUser } from './api/users';
 import { numberOfItemsInCart } from './utility/utility';
@@ -13,7 +13,7 @@ import { numberOfItemsInCart } from './utility/utility';
 import './App.scss';
 
 export default function App() {
-  const [items, setItems] = useState('');
+  const [items, setItems] = useState([]);
   const [itemsInCart, setItemsInCart] = useState([]);
   const [cartIsOpen, setCartIsOpen] = useState(false);
   const [user, setUser] = useState(null);
@@ -102,6 +102,7 @@ export default function App() {
             />
           }
         />
+        <Route path="/items/:itemId" element={<Item addToCart={addToCart} />} />
       </Routes>
     </>
   );
