@@ -1,0 +1,27 @@
+.item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.item-img {
+  height: 600px;
+  width: 600px;
+  object-fit: cover;
+}
+
+.item-price {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.item-size {
+  display: grid;
+  gap: 6px;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.btn-size {
+  padding: 20px;
+}
