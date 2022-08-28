@@ -1,6 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
 
 import './ItemCard.scss';
 
@@ -24,6 +25,11 @@ export default function ItemCardView({ item, addToCart }) {
         <Button onClick={handleClick} variant="primary">
           Buy
         </Button>
+        <Link to={`/items/${item._id}`}>
+          <Button className="ms-1" variant="primary">
+            View
+          </Button>
+        </Link>
       </Card.Body>
     </Card>
   );
