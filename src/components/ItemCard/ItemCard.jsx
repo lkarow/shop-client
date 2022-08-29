@@ -5,11 +5,7 @@ import { Link } from 'react-router-dom';
 
 import './ItemCard.scss';
 
-export default function ItemCardView({ item, addToCart }) {
-  const handleClick = () => {
-    addToCart(item);
-  };
-
+export default function ItemCardView({ item }) {
   return (
     <Card style={{ width: '18rem' }}>
       <Card.Img
@@ -22,13 +18,8 @@ export default function ItemCardView({ item, addToCart }) {
         <Card.Title>{item.Name}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{item.Brand}</Card.Subtitle>
         <Card.Text>{item.Price} €</Card.Text>
-        <Button onClick={handleClick} variant="primary">
-          Buy
-        </Button>
         <Link to={`/items/${item._id}`}>
-          <Button className="ms-1" variant="primary">
-            View
-          </Button>
+          <Button variant="primary">View</Button>
         </Link>
       </Card.Body>
     </Card>
