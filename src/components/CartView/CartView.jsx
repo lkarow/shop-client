@@ -37,7 +37,7 @@ export default function CartView({
           <div>Your shopping cart is empty.</div>
         ) : (
           itemsInCart.map((item) => (
-            <Row key={item.item._id} className="mt-3">
+            <Row key={item.item._id + item.size} className="mt-3">
               <Col md="auto">
                 <img
                   src={item.item.ImagePath}
@@ -45,8 +45,9 @@ export default function CartView({
                   alt="Item"
                 />
               </Col>
-              <Col md={2}>{item.amount} x</Col>
+              <Col md="auto">{item.amount} x</Col>
               <Col md={3}>{item.item.Name}</Col>
+              <Col md="auto">{item.size}</Col>
               <Col md={2}>{item.item.Price} €</Col>
               <Col md="auto">
                 <Button onClick={() => handleClick(item)} variant="danger">

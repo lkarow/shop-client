@@ -10,13 +10,26 @@ import './Item.scss';
 export default function Item({ addToCart }) {
   const { itemId } = useParams();
   const [item, setItem] = useState({});
+  const [size, setSize] = useState(null);
 
   useEffect(() => {
     getItem(itemId).then((response) => setItem(response));
   }, []);
 
+  // Select size
+  const selectSize = (e) => {
+    setSize(e.target.innerHTML);
+  };
+
   const handleClick = () => {
-    addToCart(item);
+    if (!size) alert('Please choose a size first.');
+    addToCart(item, size);
+    setSize(null);
+  };
+
+  const handleClickSize = (e) => {
+    e.preventDefault();
+    selectSize(e);
   };
 
   return (
@@ -28,40 +41,88 @@ export default function Item({ addToCart }) {
           <h1>{item.Name}</h1>
           <span className="item-price">{item.Price} €</span>
           <div className="item-size mt-3">
-            <Button className="btn-size" variant="outline-secondary">
+            <Button
+              className="btn-size"
+              variant="outline-secondary"
+              onClick={handleClickSize}
+            >
               36
             </Button>
-            <Button className="btn-size" variant="outline-secondary">
+            <Button
+              className="btn-size"
+              variant="outline-secondary"
+              onClick={handleClickSize}
+            >
               37
             </Button>
-            <Button className="btn-size" variant="outline-secondary">
+            <Button
+              className="btn-size"
+              variant="outline-secondary"
+              onClick={handleClickSize}
+            >
               38
             </Button>
-            <Button className="btn-size" variant="outline-secondary">
+            <Button
+              className="btn-size"
+              variant="outline-secondary"
+              onClick={handleClickSize}
+            >
               39
             </Button>
-            <Button className="btn-size" variant="outline-secondary">
+            <Button
+              className="btn-size"
+              variant="outline-secondary"
+              onClick={handleClickSize}
+            >
               40
             </Button>
-            <Button className="btn-size" variant="outline-secondary">
+            <Button
+              className="btn-size"
+              variant="outline-secondary"
+              onClick={handleClickSize}
+            >
               41
             </Button>
-            <Button className="btn-size" variant="outline-secondary">
+            <Button
+              className="btn-size"
+              variant="outline-secondary"
+              onClick={handleClickSize}
+            >
               42
             </Button>
-            <Button className="btn-size" variant="outline-secondary">
+            <Button
+              className="btn-size"
+              variant="outline-secondary"
+              onClick={handleClickSize}
+            >
               43
             </Button>
-            <Button className="btn-size" variant="outline-secondary">
+            <Button
+              className="btn-size"
+              variant="outline-secondary"
+              onClick={handleClickSize}
+            >
               44
             </Button>
-            <Button className="btn-size" variant="outline-secondary">
+            <Button
+              className="btn-size"
+              variant="outline-secondary"
+              onClick={handleClickSize}
+            >
               45
             </Button>
-            <Button className="btn-size" variant="outline-secondary">
+            <Button
+              className="btn-size"
+              variant="outline-secondary"
+              onClick={handleClickSize}
+            >
               46
             </Button>
-            <Button className="btn-size" variant="outline-secondary">
+            <Button
+              className="btn-size"
+              variant="outline-secondary"
+              onClick={handleClickSize}
+            >
               47
             </Button>
           </div>

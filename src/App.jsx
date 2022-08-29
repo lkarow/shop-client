@@ -23,13 +23,29 @@ export default function App() {
   }, []);
 
   // Add item to the cart or, if the item is already in the cart, increase the quantity
-  const addToCart = (item) => {
+  const addToCart = (item, size) => {
+    // First id in cart
     if (!itemsInCart.some((i) => i.item._id === item._id)) {
-      setItemsInCart((previous) => [...previous, { item: item, amount: 1 }]);
+      setItemsInCart((previous) => [
+        ...previous,
+        { item: item, amount: 1, size: size },
+      ]);
     }
-    if (itemsInCart.some((i) => i.item._id === item._id)) {
+
+    // Same id but different size
+    if (itemsInCart.some((i) => i.item._id === item._id && i.size !== size)) {
+      console.log(itemsInCart);
+      setItemsInCart((previous) => [
+        ...previous,
+        { item: item, amount: 1, size: size },
+      ]);
+    }
+
+    // Same id and same size
+    if (itemsInCart.some((i) => i.item._id === item._id && i.size === size)) {
       const newItemsInCart = itemsInCart.map((obj) => {
-        if (obj.item._id === item._id) return { ...obj, amount: ++obj.amount };
+        if (obj.item._id === item._id && obj.size === size)
+          return { ...obj, amount: ++obj.amount };
         return obj;
       });
       setItemsInCart(newItemsInCart);
@@ -39,15 +55,26 @@ export default function App() {
   // Remove item completely from the cart if the amount is one, otherwise decrease the amount of the item
   const removeFromCart = (item) => {
     if (
-      itemsInCart.some((i) => i.item._id === item.item._id && i.amount === 1)
+      itemsInCart.some(
+        (i) =>
+          i.item._id === item.item._id && i.size === item.size && i.amount === 1
+      )
     ) {
       setItemsInCart((previous) =>
-        previous.filter((savedItem) => savedItem.item._id !== item.item._id)
+        previous.filter(
+          (savedItem) =>
+            savedItem.item._id !== item.item._id || savedItem.size !== item.size
+        )
       );
     }
-    if (itemsInCart.some((i) => i.item._id === item.item._id && i.amount > 1)) {
+    if (
+      itemsInCart.some(
+        (i) =>
+          i.item._id === item.item._id && i.size === item.size && i.amount > 1
+      )
+    ) {
       const newItemsInCart = itemsInCart.map((obj) => {
-        if (obj.item._id === item.item._id)
+        if (obj.item._id === item.item._id && obj.size === item.size)
           return { ...obj, amount: --obj.amount };
         return obj;
       });
@@ -87,10 +114,7 @@ export default function App() {
         removeFromCart={removeFromCart}
       />
       <Routes>
-        <Route
-          path="/"
-          element={<Shop items={items} addToCart={addToCart} />}
-        />
+        <Route path="/" element={<Shop items={items} />} />
         <Route
           path="/profile"
           element={
