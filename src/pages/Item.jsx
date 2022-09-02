@@ -22,7 +22,6 @@ export default function Item({ addToCart }) {
   };
 
   const handleClick = () => {
-    if (!size) alert('Please choose a size first.');
     addToCart(item, size);
     setSize(null);
   };
@@ -126,7 +125,12 @@ export default function Item({ addToCart }) {
               47
             </Button>
           </div>
-          <Button onClick={handleClick} className="mt-5" size="lg">
+          <Button
+            onClick={handleClick}
+            className="mt-5"
+            size="lg"
+            disabled={size === null ? true : false}
+          >
             Add to cart
           </Button>
         </div>
