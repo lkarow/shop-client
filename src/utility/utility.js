@@ -26,5 +26,6 @@ export function numberOfItemsInCart(cartItems) {
 }
 
 export function formatDate(date) {
-  return new Date(date).toLocaleDateString('en-US');
+  if (date) return new Date(date).toLocaleDateString('en-US');
+  if (!date) return null;
 }
