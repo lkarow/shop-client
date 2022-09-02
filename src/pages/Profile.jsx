@@ -122,6 +122,20 @@ export default function Profile({
                     aria-describedby="password"
                   />
                 </InputGroup>
+                <Button
+                  className="m-1"
+                  variant="primary"
+                  onClick={handleSaveUserData}
+                >
+                  Save
+                </Button>
+                <Button
+                  className="m-1"
+                  variant="secondary"
+                  onClick={toggleEditPassword}
+                >
+                  Cancel
+                </Button>
               </Col>
             )}
             <Col sm={1}>
@@ -152,6 +166,20 @@ export default function Profile({
                     aria-describedby="email"
                   />
                 </InputGroup>
+                <Button
+                  className="m-1"
+                  variant="primary"
+                  onClick={handleSaveUserData}
+                >
+                  Save
+                </Button>
+                <Button
+                  className="m-1"
+                  variant="secondary"
+                  onClick={toggleEditEmail}
+                >
+                  Cancel
+                </Button>
               </Col>
             )}
             <Col sm={1}>
@@ -182,6 +210,20 @@ export default function Profile({
                     aria-describedby="birtday"
                   />
                 </InputGroup>
+                <Button
+                  className="m-1"
+                  variant="primary"
+                  onClick={handleSaveUserData}
+                >
+                  Save
+                </Button>
+                <Button
+                  className="m-1"
+                  variant="secondary"
+                  onClick={toggleEditBirthday}
+                >
+                  Cancel
+                </Button>
               </Col>
             )}
             <Col sm={1}>
