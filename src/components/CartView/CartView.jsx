@@ -4,6 +4,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import deleteIcon from '../../assets/img/delete-icon.svg';
 import './CartView.scss';
 
 import { sum } from '../../utility/utility';
@@ -50,9 +51,12 @@ export default function CartView({
               <Col md="auto">{item.size}</Col>
               <Col md={2}>{item.item.Price} €</Col>
               <Col md="auto">
-                <Button onClick={() => handleClick(item)} variant="danger">
-                  X
-                </Button>
+                <img
+                  onClick={() => handleClick(item)}
+                  src={deleteIcon}
+                  className="delete-icon"
+                  alt="Delete"
+                />
               </Col>
             </Row>
           ))
