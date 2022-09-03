@@ -125,14 +125,16 @@ export default function Item({ addToCart }) {
               47
             </Button>
           </div>
-          <Button
-            onClick={handleClick}
-            className="mt-5"
-            size="lg"
-            disabled={size === null ? true : false}
-          >
-            Add to cart
-          </Button>
+          <div className="d-grid gap-2">
+            <Button
+              onClick={handleClick}
+              className="mt-5"
+              size="lg"
+              disabled={size === null ? true : false}
+            >
+              Add to cart
+            </Button>
+          </div>
         </div>
       </div>
     </Container>
