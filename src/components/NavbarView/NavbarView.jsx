@@ -24,6 +24,9 @@ export default function NavbarView({ numberOfItemsInCart, showCart }) {
           <Nav.Link to="/" as={NavLink}>
             Shop
           </Nav.Link>
+          <Nav.Link to="/checkout" as={NavLink}>
+            Checkout
+          </Nav.Link>
           <Nav.Link to="/profile" as={NavLink}>
             Profile
           </Nav.Link>
