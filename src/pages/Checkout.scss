@@ -1,5 +1,4 @@
-.checkout-summary,
-.checkout-steps {
+.checkout-container {
   padding: 10px;
   border: 1px solid #ccc;
   box-shadow: 0 0 0.4375rem rgb(0 0 0 / 20%);
@@ -8,4 +7,5 @@
 
 .express-checkout {
   font-weight: 700;
+  text-align: center;
 }
