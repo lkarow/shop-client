@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Shop from './pages/Shop';
 import Profile from './pages/Profile';
 import Item from './pages/Item';
+import Checkout from './pages/Checkout';
 import NavbarView from './components/NavbarView/NavbarView';
 import CartView from './components/CartView/CartView';
 import { getItems } from './api/items';
@@ -127,6 +128,15 @@ export default function App() {
           }
         />
         <Route path="/items/:itemId" element={<Item addToCart={addToCart} />} />
+        <Route
+          path="/checkout"
+          element={
+            <Checkout
+              itemsInCart={itemsInCart}
+              removeFromCart={removeFromCart}
+            />
+          }
+        />
       </Routes>
     </>
   );
