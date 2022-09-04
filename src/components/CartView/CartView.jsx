@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { Link } from 'react-router-dom';
 
 import deleteIcon from '../../assets/img/delete-icon.svg';
 import './CartView.scss';
@@ -66,6 +67,13 @@ export default function CartView({
             <Col className="sum mt-4">Sum: {displaySum()} €</Col>
           </Row>
         )}
+        <Row>
+          <Link to={`/checkout`}>
+            <Button className="checkout mt-4" size="lg">
+              Checkout
+            </Button>
+          </Link>
+        </Row>
       </Offcanvas.Body>
     </Offcanvas>
   );
