@@ -15,6 +15,18 @@ export function sum(items) {
   return sum;
 }
 
+export function deliveryCost(items) {
+  let subTotal = sum(items);
+  if (!items.length) return 0.0;
+  if (subTotal >= 50) return 0.0;
+  if (subTotal < 50) return 4.99;
+}
+
+export function total(items) {
+  let total = sum(items) + deliveryCost(items);
+  return total;
+}
+
 export function numberOfItemsInCart(cartItems) {
   let numArray = [];
   cartItems.map((item) => numArray.push(item.amount));
