@@ -1,7 +1,6 @@
 import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Button } from 'react-bootstrap';
 
 import { sum, deliveryCost, total } from '../../utility/utility';
 
@@ -48,14 +47,6 @@ export default function CheckoutTotal({ itemsInCart }) {
           <Col>
             <span className="strong float-end">{displayTotal()} €</span>
           </Col>
-        </Row>
-        <Button className="checkout mt-4" size="lg" variant="warning">
-          Got to the checkout
-        </Button>
-        <Row>
-          <span className="delivery-information mt-4">
-            All orders over 50.00 EUR free shipping
-          </span>
         </Row>
       </div>
     </>
