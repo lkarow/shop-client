@@ -3,6 +3,8 @@ import { Button, Container } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 import CheckoutCart from '../components/CheckoutCart/CheckoutCart';
 import CheckoutTotal from '../components/CheckoutTotal/CheckoutTotal';
@@ -16,15 +18,19 @@ export default function Checkout({ itemsInCart, removeFromCart }) {
   const [cart, setCart] = useState(true);
   const [shipping, setShipping] = useState(false);
   const [payment, setPayment] = useState(false);
+  const [shippingAddress, setShippingAddress] = useState(false);
 
   const handleClickToCheckout = () => {
     if (!shipping && !payment) setCart(!cart);
     if (cart) setShipping(!shipping);
-    if (!cart && shipping) {
+    if (!cart && shipping && shippingAddress) {
       setShipping(!shipping);
       setPayment(!payment);
     }
-    console.log(cart + ' ' + shipping + ' ' + payment);
+  };
+
+  const saveShippingAddress = (address) => {
+    if (address) setShippingAddress(address);
   };
 
   return (
@@ -45,7 +51,9 @@ export default function Checkout({ itemsInCart, removeFromCart }) {
                 </Link>
               </>
             )}
-            {shipping && <CheckoutShipping />}
+            {shipping && (
+              <CheckoutShipping saveShippingAddress={saveShippingAddress} />
+            )}
             {payment && <CheckoutPayment />}
           </div>
         </Col>
@@ -55,18 +63,38 @@ export default function Checkout({ itemsInCart, removeFromCart }) {
               itemsInCart={itemsInCart}
               handleClickToCheckout={handleClickToCheckout}
             />
-            <Button
-              onClick={handleClickToCheckout}
-              className="checkout mt-4"
-              size="lg"
-              variant="warning"
-            >
-              {cart && <span>Proceed to shipping</span>}
-              {shipping && <span>Proceed to payment</span>}
-              {payment && <span>Pay</span>}
-
-              {/* Got to the checkout */}
-            </Button>
+            {/* Render button with tooltip if shipping form is active and shipping address is not saved */}
+            {shipping && !shippingAddress ? (
+              <OverlayTrigger
+                overlay={
+                  <Tooltip>Please save your shipping address first!</Tooltip>
+                }
+              >
+                <span>
+                  <Button
+                    onClick={handleClickToCheckout}
+                    className="checkout mt-4"
+                    size="lg"
+                    variant="warning"
+                    disabled={shipping && !shippingAddress ? true : false}
+                  >
+                    {shipping && <span>Proceed to payment</span>}
+                  </Button>
+                </span>
+              </OverlayTrigger>
+            ) : (
+              <Button
+                onClick={handleClickToCheckout}
+                className="checkout mt-4"
+                size="lg"
+                variant="warning"
+                disabled={shipping && !shippingAddress ? true : false}
+              >
+                {cart && <span>Proceed to shipping</span>}
+                {shipping && <span>Proceed to payment</span>}
+                {payment && <span>Pay</span>}
+              </Button>
+            )}
             <Row>
               <span className="delivery-information mt-4">
                 All orders over 50.00 EUR free shipping
