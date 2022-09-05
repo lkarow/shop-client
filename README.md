@@ -22,11 +22,13 @@ Client-side for a shop app I created with React and Bootstrap for practice. Item
 
 - axios
 - bootstrap
+- formik
 - parcel
 - react
 - react-bootstrap
 - react-dom
 - react-router-dom
+- yup
 
 ## Run the Project
 
