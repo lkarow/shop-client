@@ -49,7 +49,7 @@ export default function CartView({
               </Col>
               <Col md="auto">{item.amount} x</Col>
               <Col md={3}>{item.item.Name}</Col>
-              <Col md="auto">{item.size}</Col>
+              <Col md="auto">Size {item.size}</Col>
               <Col md={2}>{item.item.Price} €</Col>
               <Col md="auto">
                 <img
