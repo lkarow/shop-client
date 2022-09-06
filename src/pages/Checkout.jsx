@@ -70,7 +70,7 @@ export default function Checkout({ itemsInCart, removeFromCart }) {
                   <Tooltip>Please save your shipping address first!</Tooltip>
                 }
               >
-                <span>
+                <span className="d-block">
                   <Button
                     onClick={handleClickToCheckout}
                     className="checkout mt-4"
