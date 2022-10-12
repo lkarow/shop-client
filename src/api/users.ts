@@ -1,12 +1,25 @@
 import axios from 'axios';
 
+type UserResponse = {
+  token: string;
+  user: {
+    Birthday: string;
+    Cart: [];
+    Email: string;
+    Password: string;
+    Username: string;
+    __v: number;
+    _id: string;
+  };
+};
+
 const token = localStorage.getItem('token');
 const username = localStorage.getItem('user');
 
 // Login
-export async function login(username, password) {
+export async function login(username: string, password: string): Promise<any> {
   try {
-    let response = await axios.post(
+    let response = await axios.post<UserResponse>(
       'https://shop-api-2022.herokuapp.com/login',
       {
         Username: username,
@@ -20,12 +33,17 @@ export async function login(username, password) {
 }
 
 // Register
-export async function register(username, password, email, birthday) {
+export async function register(
+  username: string,
+  password: string,
+  email: string,
+  birthday: string
+) {
   try {
     await axios.post('https://shop-api-2022.herokuapp.com/users', {
       Username: username,
-      Email: email,
       Password: password,
+      Email: email,
       Birthday: birthday,
     });
   } catch (error) {

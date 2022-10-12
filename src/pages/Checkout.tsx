@@ -14,7 +14,36 @@ import ExpressCheckout from '../components/ExpressCheckout/ExpressCheckout';
 
 import './Checkout.scss';
 
-export default function Checkout({ itemsInCart, removeFromCart }) {
+type Props = {
+  itemsInCart: CartItem[];
+  removeFromCart: any;
+};
+
+type CartItem = {
+  item: Item;
+  amount: number;
+  size: string;
+};
+
+type Item = {
+  _id: string;
+  Name: string;
+  Brand: string;
+  Price: number;
+  ImagePath: string;
+};
+
+type Adress = {
+  firstName: string;
+  lastName: string;
+  address: string;
+  optional?: string;
+  postalCode: string;
+  city: string;
+  country: string;
+};
+
+export default function Checkout({ itemsInCart, removeFromCart }: Props) {
   const [cart, setCart] = useState(true);
   const [shipping, setShipping] = useState(false);
   const [payment, setPayment] = useState(false);
@@ -29,8 +58,8 @@ export default function Checkout({ itemsInCart, removeFromCart }) {
     }
   };
 
-  const saveShippingAddress = (address) => {
-    if (address) setShippingAddress(address);
+  const saveShippingAddress = (address: Adress) => {
+    if (address) setShippingAddress(true);
   };
 
   return (
@@ -59,10 +88,7 @@ export default function Checkout({ itemsInCart, removeFromCart }) {
         </Col>
         <Col>
           <div className="checkout-container mb-4">
-            <CheckoutTotal
-              itemsInCart={itemsInCart}
-              handleClickToCheckout={handleClickToCheckout}
-            />
+            <CheckoutTotal itemsInCart={itemsInCart} />
             {/* Render button with tooltip if shipping form is active and shipping address is not saved */}
             {shipping && !shippingAddress ? (
               <OverlayTrigger

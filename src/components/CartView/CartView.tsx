@@ -10,13 +10,34 @@ import './CartView.scss';
 
 import { sum } from '../../utility/utility';
 
+type Props = {
+  cartIsOpen: boolean;
+  showCart: any;
+  itemsInCart: CartItem[];
+  removeFromCart: any;
+};
+
+type CartItem = {
+  item: Item;
+  amount: number;
+  size: string;
+};
+
+type Item = {
+  _id: string;
+  Name: string;
+  Brand: string;
+  Price: number;
+  ImagePath: string;
+};
+
 export default function CartView({
   cartIsOpen,
   showCart,
   itemsInCart,
   removeFromCart,
-}) {
-  const handleClick = (item) => {
+}: Props) {
+  const handleClick = (item: CartItem) => {
     removeFromCart(item);
   };
 

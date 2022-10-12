@@ -9,7 +9,12 @@ import { Button } from 'react-bootstrap';
 import CartIcon from '../../assets/img/shopping-cart-icon.svg';
 import './NavbarView.scss';
 
-export default function NavbarView({ numberOfItemsInCart, showCart }) {
+type Props = {
+  numberOfItemsInCart: number;
+  showCart: any;
+};
+
+export default function NavbarView({ numberOfItemsInCart, showCart }: Props) {
   const handleClick = () => {
     showCart();
   };

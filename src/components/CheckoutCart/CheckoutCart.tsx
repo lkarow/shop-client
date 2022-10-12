@@ -6,8 +6,27 @@ import deleteIcon from '../../assets/img/delete-icon.svg';
 
 import './CheckoutCart.scss';
 
-export default function CheckoutCart({ itemsInCart, removeFromCart }) {
-  const handleClick = (item) => {
+type Props = {
+  itemsInCart: CartItem[];
+  removeFromCart: any;
+};
+
+type CartItem = {
+  item: Item;
+  amount: number;
+  size: string;
+};
+
+type Item = {
+  _id: string;
+  Name: string;
+  Brand: string;
+  Price: number;
+  ImagePath: string;
+};
+
+export default function CheckoutCart({ itemsInCart, removeFromCart }: Props) {
+  const handleClick = (item: CartItem) => {
     removeFromCart(item);
   };
 

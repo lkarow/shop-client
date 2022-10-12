@@ -13,18 +13,42 @@ import { numberOfItemsInCart } from './utility/utility';
 
 import './App.scss';
 
+type CartItem = {
+  item: Item;
+  amount: number;
+  size: string;
+};
+
+type Item = {
+  _id: string;
+  Name: string;
+  Brand: string;
+  Price: number;
+  ImagePath: string;
+};
+
+type User = {
+  Birthday?: string;
+  Cart: any;
+  Email: string;
+  Password: string;
+  Username: string;
+  __v: number;
+  _id: string;
+};
+
 export default function App() {
-  const [items, setItems] = useState([]);
-  const [itemsInCart, setItemsInCart] = useState([]);
+  const [items, setItems] = useState<Item[]>([]);
+  const [itemsInCart, setItemsInCart] = useState<CartItem[]>([]);
   const [cartIsOpen, setCartIsOpen] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
     getItems().then((response) => setItems(response));
   }, []);
 
   // Add item to the cart or, if the item is already in the cart, increase the quantity
-  const addToCart = (item, size) => {
+  const addToCart = (item: Item, size: string) => {
     // First id in cart
     if (!itemsInCart.some((i) => i.item._id === item._id)) {
       setItemsInCart((previous) => [
@@ -35,7 +59,6 @@ export default function App() {
 
     // Same id but different size
     if (itemsInCart.some((i) => i.item._id === item._id && i.size !== size)) {
-      console.log(itemsInCart);
       setItemsInCart((previous) => [
         ...previous,
         { item: item, amount: 1, size: size },
@@ -54,7 +77,7 @@ export default function App() {
   };
 
   // Remove item completely from the cart if the amount is one, otherwise decrease the amount of the item
-  const removeFromCart = (item) => {
+  const removeFromCart = (item: CartItem) => {
     if (
       itemsInCart.some(
         (i) =>
@@ -87,7 +110,7 @@ export default function App() {
     setCartIsOpen(!cartIsOpen);
   };
 
-  const saveUser = (loggedUser) => {
+  const saveUser = (loggedUser: User) => {
     setUser(loggedUser);
   };
 

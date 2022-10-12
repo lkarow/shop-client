@@ -11,12 +11,12 @@ export default function LoginView({ toggleLoginRegistration, saveUser }) {
   const [password, setPassword] = useState('');
 
   // Validate user input
-  const validLoginInput = () => {
+  const validLoginInput = (): boolean => {
     let validInput = true;
-    if (!username || username < 3) {
+    if (!username || parseInt(username) < 3) {
       validInput = false;
     }
-    if (!password || password < 4) {
+    if (!password || parseInt(password) < 4) {
       validInput = false;
     }
     return validInput;

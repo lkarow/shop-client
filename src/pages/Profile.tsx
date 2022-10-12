@@ -11,17 +11,34 @@ import RegistrationView from '../components/RegistrationView/RegistrationView';
 
 import './Profile.scss';
 
-import editIcon from '../assets/img/edit-icon.svg';
-
 import { deleteUser } from '../api/users';
 import { formatDate } from '../utility/utility';
+
+const editIcon = require('../assets/img/edit-icon.svg') as string;
+
+type Props = {
+  user: User;
+  saveUser: any;
+  handleChangeUserData: any;
+  handleSaveUserData: any;
+};
+
+type User = {
+  Birthday?: string;
+  Cart: any;
+  Email: string;
+  Password: string;
+  Username: string;
+  __v: number;
+  _id: string;
+};
 
 export default function Profile({
   user,
   saveUser,
   handleChangeUserData,
   handleSaveUserData,
-}) {
+}: Props) {
   const [isLoginActive, setIsLoginActive] = useState(true);
   const [displayUsernameEdit, setDisplayUsernameEdit] = useState(false);
   const [displayPasswordEdit, setDisplayPasswordEdit] = useState(false);
@@ -249,11 +266,7 @@ export default function Profile({
       ) : null}
 
       {user && (
-        <Button
-          onClick={() => deleteUser(user.Username)}
-          className="mt-3"
-          variant="danger"
-        >
+        <Button onClick={() => deleteUser()} className="mt-3" variant="danger">
           Delete account
         </Button>
       )}

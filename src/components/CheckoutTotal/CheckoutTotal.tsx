@@ -6,7 +6,25 @@ import { sum, deliveryCost, total } from '../../utility/utility';
 
 import './CheckoutTotal.scss';
 
-export default function CheckoutTotal({ itemsInCart }) {
+type Props = {
+  itemsInCart: CartItem[];
+};
+
+type CartItem = {
+  item: Item;
+  amount: number;
+  size: string;
+};
+
+type Item = {
+  _id: string;
+  Name: string;
+  Brand: string;
+  Price: number;
+  ImagePath: string;
+};
+
+export default function CheckoutTotal({ itemsInCart }: Props) {
   const displaySum = () => {
     if (itemsInCart) return sum(itemsInCart);
   };

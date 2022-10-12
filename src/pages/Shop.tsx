@@ -4,7 +4,19 @@ import { Container } from 'react-bootstrap';
 import ItemsList from '../components/ItemsList/ItemList';
 import ShopPagination from '../components/ShopPagination/ShopPagination';
 
-export default function Shop({ items }) {
+type Props = {
+  items: Item[];
+};
+
+type Item = {
+  _id: string;
+  Name: string;
+  Brand: string;
+  Price: number;
+  ImagePath: string;
+};
+
+export default function Shop({ items }: Props) {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(8);
 
@@ -16,7 +28,7 @@ export default function Shop({ items }) {
   const lastPage = items.length / itemsPerPage;
 
   // Change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
     <Container className="mt-5 mb-5" fluid>

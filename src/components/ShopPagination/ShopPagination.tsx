@@ -3,8 +3,18 @@ import Pagination from 'react-bootstrap/Pagination';
 
 import './ShopPagination.scss';
 
-export default function ShopPagination({ paginate, currentPage, lastPage }) {
-  let numbers = [];
+type Props = {
+  paginate: any;
+  currentPage: number;
+  lastPage: number;
+};
+
+export default function ShopPagination({
+  paginate,
+  currentPage,
+  lastPage,
+}: Props) {
+  let numbers: any[] = [];
   for (let number = 1; number <= lastPage; number++) {
     numbers.push(
       <Pagination.Item

@@ -5,7 +5,19 @@ import { Link } from 'react-router-dom';
 
 import './ItemCard.scss';
 
-export default function ItemCardView({ item }) {
+type Props = {
+  item: Item;
+};
+
+type Item = {
+  _id: string;
+  Name: string;
+  Brand: string;
+  Price: number;
+  ImagePath: string;
+};
+
+export default function ItemCardView({ item }: Props) {
   return (
     <Card style={{ width: '18rem' }}>
       <Link to={`/items/${item._id}`}>

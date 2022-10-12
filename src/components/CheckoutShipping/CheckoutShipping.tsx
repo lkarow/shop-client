@@ -7,6 +7,16 @@ import { Button } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'Yup';
 
+type Adress = {
+  firstName: string;
+  lastName: string;
+  address: string;
+  optional?: string;
+  postalCode: string;
+  city: string;
+  country: string;
+};
+
 const shippingSchema = yup.object().shape({
   firstName: yup
     .string()
@@ -40,10 +50,9 @@ export default function CheckoutShipping({ saveShippingAddress }) {
           country: '',
         }}
         validationSchema={shippingSchema}
-        onSubmit={(values) => {
+        onSubmit={(values:Adress) => {
           // same shape as initial values
           saveShippingAddress(values);
-          console.log(values);
         }}
       >
         {({ handleSubmit, handleChange, values, touched, isValid, errors }) => (
