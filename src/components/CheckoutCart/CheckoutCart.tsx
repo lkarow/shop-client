@@ -2,9 +2,9 @@ import React from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import deleteIcon from '../../assets/img/delete-icon.svg';
-
 import './CheckoutCart.scss';
+
+const deleteIcon = require('../../assets/img/delete-icon.svg') as string;
 
 type Props = {
   itemsInCart: CartItem[];

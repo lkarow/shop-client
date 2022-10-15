@@ -5,10 +5,11 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
 
-import deleteIcon from '../../assets/img/delete-icon.svg';
 import './CartView.scss';
 
 import { sum } from '../../utility/utility';
+
+const deleteIcon = require('../../assets/img/delete-icon.svg') as string;
 
 type Props = {
   cartIsOpen: boolean;

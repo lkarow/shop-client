@@ -6,8 +6,9 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Button } from 'react-bootstrap';
 
-import CartIcon from '../../assets/img/shopping-cart-icon.svg';
 import './NavbarView.scss';
+
+const cartIcon = require('../../assets/img/shopping-cart-icon.svg') as string;
 
 type Props = {
   numberOfItemsInCart: number;
@@ -37,7 +38,7 @@ export default function NavbarView({ numberOfItemsInCart, showCart }: Props) {
           </Nav.Link>
         </Nav>
         <Button className="cart-btn" variant="light" onClick={handleClick}>
-          <img src={CartIcon} className="cart-icon" alt="Shopping cart icon" />
+          <img src={cartIcon} className="cart-icon" alt="Shopping cart icon" />
           {numberOfItemsInCart > 0 && (
             <div className="item-indicator">{numberOfItemsInCart}</div>
           )}
