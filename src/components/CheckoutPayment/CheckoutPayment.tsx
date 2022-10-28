@@ -9,12 +9,21 @@ import * as yup from 'Yup';
 const creditCardSchema = yup.object().shape({
   creditCardNumber: yup
     .string()
+    .matches(/^[0-9]+$/, 'Only numbers allowed')
     .min(14, 'Too Short!')
     .max(16, 'Too Long!')
     .required('Required'),
-  expDate: yup.string().required('Required'),
+  name: yup
+    .string()
+    .matches(/^[aA-zZ\s]+$/, 'Only alphabetical letters allowed')
+    .required('Required'),
+  expDate: yup
+    .string()
+    .matches(/^[0-1][0-9]\/[0-9][0-9]+$/, 'Please enter in the format MM/YYY')
+    .required('Required'),
   cvc: yup
     .string()
+    .matches(/^[0-9]+$/, 'Only numbers allowed')
     .min(3, 'Too Short!')
     .max(3, 'Too long!')
     .required('Required'),
@@ -28,6 +37,7 @@ export default function CheckoutPayment() {
       <Formik
         initialValues={{
           creditCardNumber: '',
+          name: '',
           expDate: '',
           cvc: '',
         }}
@@ -38,9 +48,13 @@ export default function CheckoutPayment() {
         }}
       >
         {({ handleSubmit, handleChange, values, touched, isValid, errors }) => (
-          <Form>
+          <Form
+            id="paymentForm"
+            onSubmit={handleSubmit}
+            onChange={handleChange}
+          >
             <Row>
-              <Form.Group className="mb-3" controlId="paymentCreditCardNumber">
+              <Form.Group className="mb-3" controlId="creditCardNumber1">
                 <Form.Label>Credit card number</Form.Label>
                 <Form.Control
                   type="text"
@@ -58,6 +72,24 @@ export default function CheckoutPayment() {
               </Form.Group>
             </Row>
             <Row>
+              <Col>
+                <Form.Group className="mb-3" controlId="name">
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="name"
+                    value={values.name}
+                    onChange={handleChange}
+                    isValid={touched.name && !errors.name}
+                    isInvalid={!!errors.name}
+                    placeholder="Name"
+                  />
+                  <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid">
+                    {errors.name}
+                  </Form.Control.Feedback>
+                </Form.Group>
+              </Col>
               <Col>
                 <Form.Group className="mb-3" controlId="expiringDate">
                   <Form.Label>Expiring date</Form.Label>
