@@ -20,11 +20,13 @@ type Adress = {
 const shippingSchema = yup.object().shape({
   firstName: yup
     .string()
+    .matches(/^[aA-zZ\s]+$/, 'Only alphabetical letters allowed')
     .min(2, 'Too Short!')
     .max(50, 'Too Long!')
     .required('Required'),
   lastName: yup
     .string()
+    .matches(/^[aA-zZ\s]+$/, 'Only alphabetical letters allowed')
     .min(2, 'Too Short!')
     .max(50, 'Too Long!')
     .required('Required'),
@@ -32,7 +34,10 @@ const shippingSchema = yup.object().shape({
   optional: yup.string(),
   postalCode: yup.number().required('Required'),
   city: yup.string().required('Required'),
-  country: yup.string().required('Required'),
+  country: yup
+    .string()
+    .matches(/^[aA-zZ\s]+$/, 'Only alphabetical letters allowed')
+    .required('Required'),
 });
 
 export default function CheckoutShipping({ saveShippingAddress }) {
@@ -50,7 +55,7 @@ export default function CheckoutShipping({ saveShippingAddress }) {
           country: '',
         }}
         validationSchema={shippingSchema}
-        onSubmit={(values:Adress) => {
+        onSubmit={(values: Adress) => {
           // same shape as initial values
           saveShippingAddress(values);
         }}
@@ -58,7 +63,6 @@ export default function CheckoutShipping({ saveShippingAddress }) {
         {({ handleSubmit, handleChange, values, touched, isValid, errors }) => (
           <Form
             id="shippingForm"
-            noValidate
             onSubmit={handleSubmit}
             onChange={handleChange}
           >
