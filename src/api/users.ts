@@ -20,7 +20,7 @@ const username = localStorage.getItem('user');
 export async function login(username: string, password: string): Promise<any> {
   try {
     let response = await axios.post<UserResponse>(
-      'https://shop-api-2022.herokuapp.com/login',
+      'https://shop-api-nu.vercel.app/login',
       {
         Username: username,
         Password: password,
@@ -40,7 +40,7 @@ export async function register(
   birthday: string
 ) {
   try {
-    await axios.post('https://shop-api-2022.herokuapp.com/users', {
+    await axios.post('https://shop-api-nu.vercel.app/users', {
       Username: username,
       Password: password,
       Email: email,
@@ -55,7 +55,7 @@ export async function register(
 export async function getUser() {
   try {
     let response = await axios.get(
-      `https://shop-api-2022.herokuapp.com/users/${username}`,
+      `https://shop-api-nu.vercel.app/users/${username}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -70,7 +70,7 @@ export async function getUser() {
 export async function deleteUser() {
   try {
     await axios.delete(
-      `https://shop-api-2022.herokuapp.com/users/${username}`,
+      `https://shop-api-nu.vercel.app/users/${username}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }
@@ -87,7 +87,7 @@ export async function deleteUser() {
 export async function updateUser(userData) {
   try {
     await axios.put(
-      `https://shop-api-2022.herokuapp.com/users/${username}`,
+      `https://shop-api-nu.vercel.app/users/${username}`,
       {
         Username: userData.Username,
         Password: userData.Password,

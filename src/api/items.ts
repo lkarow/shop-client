@@ -11,7 +11,7 @@ type Item = {
 export async function getItems():Promise<any> {
   try {
     let response = await axios.get<Item[]>(
-      'https://shop-api-2022.herokuapp.com/items'
+      'https://shop-api-nu.vercel.app/items'
     );
     return response.data;
   } catch (error) {
@@ -22,7 +22,7 @@ export async function getItems():Promise<any> {
 export async function getItem(itemId: string) {
   try {
     let response = await axios.get<Item>(
-      `https://shop-api-2022.herokuapp.com/items/${itemId}`
+      `https://shop-api-nu.vercel.app/items/${itemId}`
     );
     return response.data;
   } catch (error) {
